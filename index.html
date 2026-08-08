@@ -114,12 +114,49 @@
       text-align: center;
     }
 
-    canvas {
+    /*
+      COLORING SYSTEM
+      ----------------
+      The paint canvas is the bottom layer.
+      The black-and-white coloring artwork is the protected top layer.
+      This keeps JO's artwork visible and prevents the eraser
+      from erasing the turtle.
+    */
+
+    .coloring-stage {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      max-width: 100%;
+      margin: 0 auto;
       border: 3px solid #333;
       border-radius: 14px;
+      overflow: hidden;
       background: white;
-      max-width: 100%;
+    }
+
+    #coloring-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: white;
+      pointer-events: none;
+      z-index: 2;
+      mix-blend-mode: multiply;
+    }
+
+    .coloring-stage canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
       touch-action: none;
+      z-index: 1;
     }
 
     .palette {
@@ -191,46 +228,76 @@
 <body>
 
 <header>
+
   <div class="jo-placeholder">
-  <img src="Jo%20Explorer%20LOGO.png" alt="JO Explorer" style="max-width:180px; height:auto;">
-</div>
+    <img
+      src="Jo%20Explorer%20LOGO.png"
+      alt="JO Explorer"
+      style="max-width:180px; height:auto;"
+    >
+  </div>
+
   <h1>COLOR WITH JO!</h1>
-  <p>Pick an adventure. Meet the animals. Color your favorites!</p>
+
+  <p>
+    Pick an adventure. Meet the animals. Color your favorites!
+  </p>
+
 </header>
 
+
 <div class="container">
+
+
+  <!-- HOME -->
 
   <div id="home">
 
     <div class="main-buttons">
 
-      <div class="big-button" onclick="showEpisodes()">
+      <div
+        class="big-button"
+        onclick="showEpisodes()"
+      >
         <span>🏝️</span>
         Choose an Adventure
       </div>
 
-      <div class="big-button" onclick="showAllAnimals()">
+      <div
+        class="big-button"
+        onclick="showAllAnimals()"
+      >
         <span>🦋</span>
         Choose an Animal
       </div>
 
     </div>
 
+
     <div class="grownups">
 
       <h2>For Grown-Ups</h2>
 
       <p>
-        Watch JO's Island, follow SNOJO, and learn more about JO's adventures.
+        Watch JO's Island, follow SNOJO,
+        and learn more about JO's adventures.
       </p>
 
       <div class="grownup-links">
 
-        <a href="https://www.youtube.com/channel/UCcCKp9LdZSoBN5NuaoEQ5TQ" target="_blank">
+        <a
+          href="https://www.youtube.com/channel/UCcCKp9LdZSoBN5NuaoEQ5TQ"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           ▶ Watch JO's Island on YouTube
         </a>
 
-        <a href="https://www.facebook.com/profile.php?id=61593272391851" target="_blank">
+        <a
+          href="https://www.facebook.com/profile.php?id=61593272391851"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Visit SNOJO on Facebook
         </a>
 
@@ -240,96 +307,297 @@
 
   </div>
 
-  <div id="episodes" class="section">
 
-    <button class="back-button" onclick="goHome()">← Home</button>
+  <!-- EPISODES -->
+
+  <div
+    id="episodes"
+    class="section"
+  >
+
+    <button
+      class="back-button"
+      onclick="goHome()"
+    >
+      ← Home
+    </button>
 
     <h2>Choose JO's Adventure</h2>
 
+
     <div class="episode-grid">
 
-      <div class="card" onclick="showEpisodeAnimals('S1E1')">
-        <img src="1.png" alt="S1E1 The Mysterious Footprints" style="width:100%; border-radius:12px;">
+
+      <!-- EPISODE 1 -->
+
+      <div
+        class="card"
+        onclick="showEpisodeAnimals('S1E1')"
+      >
+
+        <img
+          src="1.png"
+          alt="S1E1 The Mysterious Footprints"
+          style="width:100%; border-radius:12px;"
+        >
+
         <strong>S1E1</strong>
-        <p>The Mysterious Footprints</p>
+
+        <p>
+          The Mysterious Footprints
+        </p>
+
       </div>
 
-      <div class="card" onclick="showEpisodeAnimals('S1E2')">
-        <img src="2.png" alt="S1E2 The Mysterious Cave" style="width:100%; border-radius:12px;">
+
+      <!-- EPISODE 2 -->
+
+      <div
+        class="card"
+        onclick="showEpisodeAnimals('S1E2')"
+      >
+
+        <img
+          src="2.png"
+          alt="S1E2 The Mysterious Cave"
+          style="width:100%; border-radius:12px;"
+        >
+
         <strong>S1E2</strong>
-        <p>The Mysterious Cave</p>
+
+        <p>
+          The Mysterious Cave
+        </p>
+
       </div>
 
-      <div class="card" onclick="showEpisodeAnimals('S1E3')">
-        <img src="3.png" alt="S1E3 The Great Turtle Journey" style="width:100%; border-radius:12px;">
+
+      <!-- EPISODE 3 -->
+
+      <div
+        class="card"
+        onclick="showEpisodeAnimals('S1E3')"
+      >
+
+        <img
+          src="3.png"
+          alt="S1E3 The Great Turtle Journey"
+          style="width:100%; border-radius:12px;"
+        >
+
         <strong>S1E3</strong>
-        <p>The Great Turtle Journey</p>
+
+        <p>
+          The Great Turtle Journey
+        </p>
+
       </div>
 
-      <div class="card" onclick="showEpisodeAnimals('S1E4')">
-        <img src="4.png" alt="S1E4 The Mystery of the Rainforest Call" style="width:100%; border-radius:12px;">
+
+      <!-- EPISODE 4 -->
+
+      <div
+        class="card"
+        onclick="showEpisodeAnimals('S1E4')"
+      >
+
+        <img
+          src="4.png"
+          alt="S1E4 The Mystery of the Rainforest Call"
+          style="width:100%; border-radius:12px;"
+        >
+
         <strong>S1E4</strong>
-        <p>Mystery of the Rainforest Call</p>
+
+        <p>
+          Mystery of the Rainforest Call
+        </p>
+
       </div>
+
 
     </div>
 
   </div>
 
-  <div id="animals" class="section">
 
-    <button class="back-button" onclick="goHome()">← Home</button>
+  <!-- ANIMAL SELECTION -->
 
-    <h2 id="animal-heading">Choose an Animal</h2>
+  <div
+    id="animals"
+    class="section"
+  >
 
-    <div id="animal-grid" class="animal-grid"></div>
+    <button
+      class="back-button"
+      onclick="goHome()"
+    >
+      ← Home
+    </button>
+
+    <h2 id="animal-heading">
+      Choose an Animal
+    </h2>
+
+    <div
+      id="animal-grid"
+      class="animal-grid"
+    >
+    </div>
 
   </div>
 
-  <div id="coloring" class="section">
 
-    <button class="back-button" onclick="showAllAnimals()">← Animals</button>
+  <!-- COLORING PAGE -->
+
+  <div
+    id="coloring"
+    class="section"
+  >
+
+    <button
+      class="back-button"
+      onclick="returnToAnimals()"
+    >
+      ← Animals
+    </button>
+
 
     <div class="color-area">
 
-      <h2 id="color-title">Color With JO!</h2>
+      <h2 id="color-title">
+        Color With JO!
+      </h2>
 
-      <canvas id="canvas" width="500" height="500"></canvas>
+
+      <!--
+        PROTECTED COLORING ART SYSTEM
+
+        canvas = child's paint
+        coloring-image = protected black line artwork
+      -->
+
+      <div class="coloring-stage">
+
+        <img
+          id="coloring-image"
+          src=""
+          alt="Coloring page"
+        >
+
+        <canvas
+          id="canvas"
+          width="500"
+          height="500"
+        >
+        </canvas>
+
+      </div>
+
+
+      <!-- COLORS -->
 
       <div class="palette">
 
-        <button class="color" style="background:red" onclick="setColor('red')"></button>
-        <button class="color" style="background:orange" onclick="setColor('orange')"></button>
-        <button class="color" style="background:yellow" onclick="setColor('yellow')"></button>
-        <button class="color" style="background:green" onclick="setColor('green')"></button>
-        <button class="color" style="background:blue" onclick="setColor('blue')"></button>
-        <button class="color" style="background:purple" onclick="setColor('purple')"></button>
-        <button class="color" style="background:pink" onclick="setColor('pink')"></button>
+        <button
+          class="color"
+          style="background:red"
+          onclick="setColor('red')"
+          aria-label="Red"
+        >
+        </button>
+
+        <button
+          class="color"
+          style="background:orange"
+          onclick="setColor('orange')"
+          aria-label="Orange"
+        >
+        </button>
+
+        <button
+          class="color"
+          style="background:yellow"
+          onclick="setColor('yellow')"
+          aria-label="Yellow"
+        >
+        </button>
+
+        <button
+          class="color"
+          style="background:green"
+          onclick="setColor('green')"
+          aria-label="Green"
+        >
+        </button>
+
+        <button
+          class="color"
+          style="background:blue"
+          onclick="setColor('blue')"
+          aria-label="Blue"
+        >
+        </button>
+
+        <button
+          class="color"
+          style="background:purple"
+          onclick="setColor('purple')"
+          aria-label="Purple"
+        >
+        </button>
+
+        <button
+          class="color"
+          style="background:pink"
+          onclick="setColor('pink')"
+          aria-label="Pink"
+        >
+        </button>
 
       </div>
+
+
+      <!-- TOOLS -->
 
       <div class="tools">
 
-        <button onclick="setColor('white')">Eraser</button>
-        <button onclick="clearCanvas()">Start Over</button>
+        <button onclick="setEraser()">
+          Eraser
+        </button>
+
+        <button onclick="clearCanvas()">
+          Start Over
+        </button>
 
       </div>
+
 
       <p>
         Great job, Explorer!
       </p>
 
+
     </div>
 
   </div>
 
+
 </div>
+
 
 <footer>
   Color With JO • JO's Island • SNOJO
 </footer>
 
+
+
 <script>
+
+
+/* =========================================
+   ANIMALS BY EPISODE
+========================================= */
 
 const episodeAnimals = {
 
@@ -354,43 +622,95 @@ const episodeAnimals = {
 
 };
 
+
+/*
+  Animals shown when the child chooses
+  "Choose an Animal" from the home page.
+
+  Sea Turtle now uses the real coloring page.
+  Other animals remain placeholders until
+  their coloring pages are created.
+*/
+
 const allAnimals = [
-  ["Sea Turtle", "🐢"],
+
+  ["Sea Turtle", "Turtle page.png"],
+
   ["Baby Sea Turtle", "🐢"],
+
   ["Octopus", "🐙"],
+
   ["Rainforest Bird", "🐦"],
+
   ["Butterfly", "🦋"],
+
   ["Lizard", "🦎"]
+
 ];
+
+
+/*
+  Remember which animal menu the child came from.
+  This lets the Animals button return to the
+  correct menu instead of always showing all animals.
+*/
+
+let currentAnimalList = allAnimals;
+
+let currentAnimalHeading =
+  "Choose an Animal";
+
+
+/* =========================================
+   PAGE NAVIGATION
+========================================= */
 
 function hideEverything() {
 
-  document.getElementById("home").style.display = "none";
-  document.getElementById("episodes").style.display = "none";
-  document.getElementById("animals").style.display = "none";
-  document.getElementById("coloring").style.display = "none";
+  document.getElementById("home")
+    .style.display = "none";
+
+  document.getElementById("episodes")
+    .style.display = "none";
+
+  document.getElementById("animals")
+    .style.display = "none";
+
+  document.getElementById("coloring")
+    .style.display = "none";
 
 }
+
 
 function goHome() {
 
   hideEverything();
-  document.getElementById("home").style.display = "block";
+
+  document.getElementById("home")
+    .style.display = "block";
 
 }
+
 
 function showEpisodes() {
 
   hideEverything();
-  document.getElementById("episodes").style.display = "block";
+
+  document.getElementById("episodes")
+    .style.display = "block";
 
 }
+
 
 function showAllAnimals() {
 
-  showAnimals(allAnimals, "Choose an Animal");
+  showAnimals(
+    allAnimals,
+    "Choose an Animal"
+  );
 
 }
+
 
 function showEpisodeAnimals(ep) {
 
@@ -401,160 +721,527 @@ function showEpisodeAnimals(ep) {
 
 }
 
+
+function returnToAnimals() {
+
+  showAnimals(
+    currentAnimalList,
+    currentAnimalHeading
+  );
+
+}
+
+
+/* =========================================
+   BUILD ANIMAL CARDS
+========================================= */
+
 function showAnimals(list, heading) {
+
+  currentAnimalList = list;
+
+  currentAnimalHeading = heading;
+
 
   hideEverything();
 
-  document.getElementById("animals").style.display = "block";
-  document.getElementById("animal-heading").innerText = heading;
 
-  const grid = document.getElementById("animal-grid");
+  document.getElementById("animals")
+    .style.display = "block";
+
+
+  document.getElementById("animal-heading")
+    .innerText = heading;
+
+
+  const grid =
+    document.getElementById("animal-grid");
+
 
   grid.innerHTML = "";
 
+
   list.forEach(animal => {
 
-    const card = document.createElement("div");
+
+    const card =
+      document.createElement("div");
+
 
     card.className = "card";
 
-    const visual = animal[1].toLowerCase().endsWith(".png")
-    ? '<img src="' + animal[1] + '" alt="' + animal[0] + '" style="width:100%; max-height:180px; object-fit:contain; border-radius:12px;">'
-    : '<div class="emoji">' + animal[1] + '</div>';
 
-card.innerHTML =
-    visual +
-    '<strong>' + animal[0] + '</strong>' +
-    '<p>Tap to Color</p>';
+    /*
+      If the animal has a PNG coloring page,
+      show that picture.
+
+      Otherwise continue showing the emoji
+      until we create that animal's real page.
+    */
+
+    const visual =
+      animal[1]
+        .toLowerCase()
+        .endsWith(".png")
+
+      ?
+
+      '<img src="' +
+      encodeURI(animal[1]) +
+      '" alt="' +
+      animal[0] +
+      '" style="width:100%; max-height:180px; object-fit:contain; border-radius:12px;">'
+
+      :
+
+      '<div class="emoji">' +
+      animal[1] +
+      '</div>';
+
+
+    card.innerHTML =
+
+      visual +
+
+      '<strong>' +
+      animal[0] +
+      '</strong>' +
+
+      '<p>Tap to Color</p>';
+
 
     card.onclick = function () {
 
-      openColoring(animal[0], animal[1]);
+      openColoring(
+        animal[0],
+        animal[1]
+      );
 
     };
 
+
     grid.appendChild(card);
+
 
   });
 
 }
 
-function openColoring(name, imageFile) {
+
+/* =========================================
+   OPEN COLORING PAGE
+========================================= */
+
+function openColoring(
+  name,
+  imageFile
+) {
 
   hideEverything();
 
-  document.getElementById("coloring").style.display = "block";
-  document.getElementById("color-title").innerText =
+
+  document.getElementById("coloring")
+    .style.display = "block";
+
+
+  document.getElementById("color-title")
+    .innerText =
     "Color the " + name + "!";
 
-  if (imageFile && imageFile.toLowerCase().endsWith(".png")) {
-  const img = new Image();
 
-  img.onload = function () {
-    clearCanvas();
-
-    const scale = Math.min(
-      canvas.width / img.width,
-      canvas.height / img.height
+  const coloringImage =
+    document.getElementById(
+      "coloring-image"
     );
 
-    const width = img.width * scale;
-    const height = img.height * scale;
 
-    const x = (canvas.width - width) / 2;
-    const y = (canvas.height - height) / 2;
+  /*
+    Clear ONLY the child's paint.
+    The protected artwork is a separate
+    image and is never erased.
+  */
 
-    ctx.drawImage(img, x, y, width, height);
-  };
-
-  img.src = imageFile;
-} else {
   clearCanvas();
-}
+
+
+  /*
+    Load the black-and-white artwork
+    into the protected TOP layer.
+  */
+
+  if (
+    imageFile &&
+    imageFile
+      .toLowerCase()
+      .endsWith(".png")
+  ) {
+
+    coloringImage.src =
+      encodeURI(imageFile);
+
+    coloringImage.alt =
+      name + " coloring page";
+
+    coloringImage.style.display =
+      "block";
+
+  }
+
+  else {
+
+    /*
+      Emoji animals are placeholders.
+      Their real coloring artwork will
+      be added later.
+    */
+
+    coloringImage.removeAttribute(
+      "src"
+    );
+
+    coloringImage.alt = "";
+
+    coloringImage.style.display =
+      "none";
+
+  }
+
 }
 
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+
+/* =========================================
+   CANVAS SETUP
+========================================= */
+
+const canvas =
+  document.getElementById("canvas");
+
+
+const ctx =
+  canvas.getContext("2d");
+
 
 let drawing = false;
+
 let color = "blue";
 
+let eraserMode = false;
+
+
+/*
+  Brush size.
+*/
+
 ctx.lineWidth = 18;
+
 ctx.lineCap = "round";
+
+ctx.lineJoin = "round";
+
+
+/* =========================================
+   COLOR SELECTION
+========================================= */
 
 function setColor(newColor) {
 
   color = newColor;
 
+  eraserMode = false;
+
 }
+
+
+/* =========================================
+   ERASER
+========================================= */
+
+function setEraser() {
+
+  eraserMode = true;
+
+}
+
+
+/* =========================================
+   POINTER POSITION
+========================================= */
 
 function getPosition(e) {
 
-  const rect = canvas.getBoundingClientRect();
+  const rect =
+    canvas.getBoundingClientRect();
 
-  const clientX =
-    e.touches ? e.touches[0].clientX : e.clientX;
 
-  const clientY =
-    e.touches ? e.touches[0].clientY : e.clientY;
+  /*
+    Works with mouse and touchscreen.
+  */
+
+  const point =
+
+    e.touches &&
+    e.touches.length
+
+    ? e.touches[0]
+
+    :
+
+    e.changedTouches &&
+    e.changedTouches.length
+
+    ? e.changedTouches[0]
+
+    :
+
+    e;
+
 
   return {
-    x: (clientX - rect.left) * (canvas.width / rect.width),
-    y: (clientY - rect.top) * (canvas.height / rect.height)
+
+    x:
+      (point.clientX - rect.left) *
+      (canvas.width / rect.width),
+
+    y:
+      (point.clientY - rect.top) *
+      (canvas.height / rect.height)
+
   };
 
 }
 
+
+/* =========================================
+   START DRAWING
+========================================= */
+
 function startDraw(e) {
+
+  e.preventDefault();
+
 
   drawing = true;
 
-  const pos = getPosition(e);
+
+  const pos =
+    getPosition(e);
+
 
   ctx.beginPath();
-  ctx.moveTo(pos.x, pos.y);
+
+  ctx.moveTo(
+    pos.x,
+    pos.y
+  );
 
 }
+
+
+/* =========================================
+   DRAW
+========================================= */
 
 function draw(e) {
 
   if (!drawing) return;
 
+
   e.preventDefault();
 
-  const pos = getPosition(e);
 
-  ctx.globalAlpha = 0.4;
-ctx.strokeStyle = color;
-ctx.lineTo(pos.x, pos.y);
-ctx.stroke();
-ctx.globalAlpha = 1.0;
+  const pos =
+    getPosition(e);
+
+
+  /*
+    ERASER MODE
+
+    destination-out removes ONLY pixels
+    from the paint canvas.
+
+    It cannot erase the turtle artwork
+    because the turtle is a separate layer.
+  */
+
+  if (eraserMode) {
+
+    ctx.globalCompositeOperation =
+      "destination-out";
+
+    ctx.globalAlpha = 1.0;
+
+  }
+
+
+  /*
+    PAINT MODE
+
+    Paint is intentionally translucent.
+
+    The black line art is also on the
+    protected layer ABOVE the paint,
+    so shell details, eyes, plants,
+    coral, and the JO logo remain visible.
+  */
+
+  else {
+
+    ctx.globalCompositeOperation =
+      "source-over";
+
+    ctx.globalAlpha = 0.35;
+
+    ctx.strokeStyle = color;
+
+  }
+
+
+  ctx.lineTo(
+    pos.x,
+    pos.y
+  );
+
+
+  ctx.stroke();
+
+
+  /*
+    Always restore normal canvas behavior
+    after every stroke.
+  */
+
+  ctx.globalAlpha = 1.0;
+
+  ctx.globalCompositeOperation =
+    "source-over";
 
 }
+
+
+/* =========================================
+   STOP DRAWING
+========================================= */
 
 function stopDraw() {
 
   drawing = false;
 
+  ctx.beginPath();
+
 }
 
-canvas.addEventListener("mousedown", startDraw);
-canvas.addEventListener("mousemove", draw);
-canvas.addEventListener("mouseup", stopDraw);
-canvas.addEventListener("mouseleave", stopDraw);
 
-canvas.addEventListener("touchstart", startDraw);
-canvas.addEventListener("touchmove", draw);
-canvas.addEventListener("touchend", stopDraw);
+/* =========================================
+   MOUSE CONTROLS
+========================================= */
+
+canvas.addEventListener(
+  "mousedown",
+  startDraw
+);
+
+
+canvas.addEventListener(
+  "mousemove",
+  draw
+);
+
+
+canvas.addEventListener(
+  "mouseup",
+  stopDraw
+);
+
+
+canvas.addEventListener(
+  "mouseleave",
+  stopDraw
+);
+
+
+/* =========================================
+   PHONE / TABLET CONTROLS
+========================================= */
+
+canvas.addEventListener(
+  "touchstart",
+  startDraw,
+  { passive: false }
+);
+
+
+canvas.addEventListener(
+  "touchmove",
+  draw,
+  { passive: false }
+);
+
+
+canvas.addEventListener(
+  "touchend",
+  stopDraw,
+  { passive: false }
+);
+
+
+canvas.addEventListener(
+  "touchcancel",
+  stopDraw,
+  { passive: false }
+);
+
+
+/* =========================================
+   START OVER
+========================================= */
 
 function clearCanvas() {
 
-  ctx.fillStyle = "white";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  /*
+    IMPORTANT:
+
+    We do NOT paint the canvas white.
+
+    We make the paint canvas transparent.
+
+    That exposes the protected turtle
+    underneath without changing or
+    erasing the turtle.
+  */
+
+  ctx.save();
+
+
+  ctx.globalAlpha = 1.0;
+
+
+  ctx.globalCompositeOperation =
+    "source-over";
+
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  ctx.restore();
+
+
+  eraserMode = false;
 
 }
 
+
+/*
+  Begin with a clean transparent
+  paint layer.
+*/
+
 clearCanvas();
+
 
 </script>
 
