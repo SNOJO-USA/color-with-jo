@@ -524,9 +524,11 @@ function draw(e) {
 
   const pos = getPosition(e);
 
-  ctx.strokeStyle = color;
-  ctx.lineTo(pos.x, pos.y);
-  ctx.stroke();
+  ctx.globalAlpha = 0.4;
+ctx.strokeStyle = color;
+ctx.lineTo(pos.x, pos.y);
+ctx.stroke();
+ctx.globalAlpha = 1.0;
 
 }
 
