@@ -429,7 +429,7 @@ card.innerHTML =
 
     card.onclick = function () {
 
-      openColoring(animal[0]);
+      openColoring(animal[0], animal[1]);
 
     };
 
@@ -439,7 +439,7 @@ card.innerHTML =
 
 }
 
-function openColoring(name) {
+function openColoring(name, imageFile) {
 
   hideEverything();
 
@@ -447,8 +447,30 @@ function openColoring(name) {
   document.getElementById("color-title").innerText =
     "Color the " + name + "!";
 
-  clearCanvas();
+  if (imageFile && imageFile.toLowerCase().endsWith(".png")) {
+  const img = new Image();
 
+  img.onload = function () {
+    clearCanvas();
+
+    const scale = Math.min(
+      canvas.width / img.width,
+      canvas.height / img.height
+    );
+
+    const width = img.width * scale;
+    const height = img.height * scale;
+
+    const x = (canvas.width - width) / 2;
+    const y = (canvas.height - height) / 2;
+
+    ctx.drawImage(img, x, y, width, height);
+  };
+
+  img.src = imageFile;
+} else {
+  clearCanvas();
+}
 }
 
 const canvas = document.getElementById("canvas");
