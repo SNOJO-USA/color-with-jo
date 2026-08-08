@@ -418,12 +418,14 @@ function showAnimals(list, heading) {
 
     card.className = "card";
 
-    card.innerHTML =
-      '<div class="emoji">' +
-      animal[1] +
-      '</div><strong>' +
-      animal[0] +
-      '</strong><p>Tap to Color</p>';
+    const visual = animal[1].toLowerCase().endsWith(".png")
+    ? '<img src="' + animal[1] + '" alt="' + animal[0] + '" style="width:100%; max-height:180px; object-fit:contain; border-radius:12px;">'
+    : '<div class="emoji">' + animal[1] + '</div>';
+
+card.innerHTML =
+    visual +
+    '<strong>' + animal[0] + '</strong>' +
+    '<p>Tap to Color</p>';
 
     card.onclick = function () {
 
