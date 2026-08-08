@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color With JO</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #eef9ff;
+      color: #16324f;
+    }
+
+    header {
+      background: #ffffff;
+      text-align: center;
+      padding: 30px 20px;
+      border-bottom: 4px solid #5bbad5;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 38px;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    .jo-placeholder {
+      font-size: 80px;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: auto;
+      padding: 25px;
+    }
+
+    .main-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 35px;
+    }
+
+    .big-button {
+      background: white;
+      border: 3px solid #5bbad5;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .big-button:hover {
+      background: #dff5ff;
+    }
+
+    .big-button span {
+      display: block;
+      font-size: 55px;
+      margin-bottom: 10px;
+    }
+
+    .section {
+      display: none;
+      margin-top: 25px;
+    }
+
+    .episode-grid,
+    .animal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      background: white;
+      border: 2px solid #c4e7f2;
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      background: #eafaff;
+    }
+
+    .emoji {
+      font-size: 55px;
+    }
+
+    .back-button {
+      margin-bottom: 20px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      border: 2px solid #5bbad5;
+      background: white;
+      cursor: pointer;
+    }
+
+    .color-area {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    canvas {
+      border: 3px solid #333;
+      border-radius: 14px;
+      background: white;
+      max-width: 100%;
+      touch-action: none;
+    }
+
+    .palette {
+      margin-top: 20px;
+    }
+
+    .color {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid #333;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    .tools button {
+      margin: 10px 5px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 2px solid #5bbad5;
+      background: white;
+      cursor: pointer;
+    }
+
+    .grownups {
+      margin-top: 40px;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 18px;
+      border: 2px solid #c4e7f2;
+    }
+
+    .grownup-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .grownup-links a {
+      display: block;
+      padding: 18px;
+      border-radius: 15px;
+      background: #edf8ff;
+      color: #16324f;
+      text-decoration: none;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 650px) {
+      .main-buttons,
+      .grownup-links {
+        grid-template-columns: 1fr;
+      }
+
+      header h1 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="jo-placeholder">🐢</div>
+  <h1>COLOR WITH JO!</h1>
+  <p>Pick an adventure. Meet the animals. Color your favorites!</p>
+</header>
+
+<div class="container">
+
+  <div id="home">
+
+    <div class="main-buttons">
+
+      <div class="big-button" onclick="showEpisodes()">
+        <span>🏝️</span>
+        Choose an Adventure
+      </div>
+
+      <div class="big-button" onclick="showAllAnimals()">
+        <span>🦋</span>
+        Choose an Animal
+      </div>
+
+    </div>
+
+    <div class="grownups">
+
+      <h2>For Grown-Ups</h2>
+
+      <p>
+        Watch JO's Island, follow SNOJO, and learn more about JO's adventures.
+      </p>
+
+      <div class="grownup-links">
+
+        <a href="#" target="_blank">
+          ▶ Watch JO's Island on YouTube
+        </a>
+
+        <a href="#" target="_blank">
+          Visit SNOJO on Facebook
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="episodes" class="section">
+
+    <button class="back-button" onclick="goHome()">← Home</button>
+
+    <h2>Choose JO's Adventure</h2>
+
+    <div class="episode-grid">
+
+      <div class="card" onclick="showEpisodeAnimals('S1E1')">
+        <div class="emoji">👣</div>
+        <strong>S1E1</strong>
+        <p>The Mysterious Footprints</p>
+      </div>
+
+      <div class="card" onclick="showEpisodeAnimals('S1E2')">
+        <div class="emoji">🐙</div>
+        <strong>S1E2</strong>
+        <p>The Mysterious Cave</p>
+      </div>
+
+      <div class="card" onclick="showEpisodeAnimals('S1E3')">
+        <div class="emoji">🐢</div>
+        <strong>S1E3</strong>
+        <p>The Great Turtle Journey</p>
+      </div>
+
+      <div class="card" onclick="showEpisodeAnimals('S1E4')">
+        <div class="emoji">🦋</div>
+        <strong>S1E4</strong>
+        <p>Mystery of the Rainforest Call</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="animals" class="section">
+
+    <button class="back-button" onclick="goHome()">← Home</button>
+
+    <h2 id="animal-heading">Choose an Animal</h2>
+
+    <div id="animal-grid" class="animal-grid"></div>
+
+  </div>
+
+  <div id="coloring" class="section">
+
+    <button class="back-button" onclick="showAllAnimals()">← Animals</button>
+
+    <div class="color-area">
+
+      <h2 id="color-title">Color With JO!</h2>
+
+      <canvas id="canvas" width="500" height="500"></canvas>
+
+      <div class="palette">
+
+        <button class="color" style="background:red" onclick="setColor('red')"></button>
+        <button class="color" style="background:orange" onclick="setColor('orange')"></button>
+        <button class="color" style="background:yellow" onclick="setColor('yellow')"></button>
+        <button class="color" style="background:green" onclick="setColor('green')"></button>
+        <button class="color" style="background:blue" onclick="setColor('blue')"></button>
+        <button class="color" style="background:purple" onclick="setColor('purple')"></button>
+        <button class="color" style="background:pink" onclick="setColor('pink')"></button>
+
+      </div>
+
+      <div class="tools">
+
+        <button onclick="setColor('white')">Eraser</button>
+        <button onclick="clearCanvas()">Start Over</button>
+
+      </div>
+
+      <p>
+        Great job, Explorer!
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  Color With JO • JO's Island • SNOJO
+</footer>
+
+<script>
+
+const episodeAnimals = {
+
+  S1E1: [
+    ["Sea Turtle", "🐢"]
+  ],
+
+  S1E2: [
+    ["Octopus", "🐙"],
+    ["Sea Turtle", "🐢"]
+  ],
+
+  S1E3: [
+    ["Baby Sea Turtle", "🐢"]
+  ],
+
+  S1E4: [
+    ["Rainforest Bird", "🐦"],
+    ["Butterfly", "🦋"],
+    ["Lizard", "🦎"]
+  ]
+
+};
+
+const allAnimals = [
+  ["Sea Turtle", "🐢"],
+  ["Baby Sea Turtle", "🐢"],
+  ["Octopus", "🐙"],
+  ["Rainforest Bird", "🐦"],
+  ["Butterfly", "🦋"],
+  ["Lizard", "🦎"]
+];
+
+function hideEverything() {
+
+  document.getElementById("home").style.display = "none";
+  document.getElementById("episodes").style.display = "none";
+  document.getElementById("animals").style.display = "none";
+  document.getElementById("coloring").style.display = "none";
+
+}
+
+function goHome() {
+
+  hideEverything();
+  document.getElementById("home").style.display = "block";
+
+}
+
+function showEpisodes() {
+
+  hideEverything();
+  document.getElementById("episodes").style.display = "block";
+
+}
+
+function showAllAnimals() {
+
+  showAnimals(allAnimals, "Choose an Animal");
+
+}
+
+function showEpisodeAnimals(ep) {
+
+  showAnimals(
+    episodeAnimals[ep],
+    ep + " Animals"
+  );
+
+}
+
+function showAnimals(list, heading) {
+
+  hideEverything();
+
+  document.getElementById("animals").style.display = "block";
+  document.getElementById("animal-heading").innerText = heading;
+
+  const grid = document.getElementById("animal-grid");
+
+  grid.innerHTML = "";
+
+  list.forEach(animal => {
+
+    const card = document.createElement("div");
+
+    card.className = "card";
+
+    card.innerHTML =
+      '<div class="emoji">' +
+      animal[1] +
+      '</div><strong>' +
+      animal[0] +
+      '</strong><p>Tap to Color</p>';
+
+    card.onclick = function () {
+
+      openColoring(animal[0]);
+
+    };
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+function openColoring(name) {
+
+  hideEverything();
+
+  document.getElementById("coloring").style.display = "block";
+  document.getElementById("color-title").innerText =
+    "Color the " + name + "!";
+
+  clearCanvas();
+
+}
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+let drawing = false;
+let color = "blue";
+
+ctx.lineWidth = 18;
+ctx.lineCap = "round";
+
+function setColor(newColor) {
+
+  color = newColor;
+
+}
+
+function getPosition(e) {
+
+  const rect = canvas.getBoundingClientRect();
+
+  const clientX =
+    e.touches ? e.touches[0].clientX : e.clientX;
+
+  const clientY =
+    e.touches ? e.touches[0].clientY : e.clientY;
+
+  return {
+    x: (clientX - rect.left) * (canvas.width / rect.width),
+    y: (clientY - rect.top) * (canvas.height / rect.height)
+  };
+
+}
+
+function startDraw(e) {
+
+  drawing = true;
+
+  const pos = getPosition(e);
+
+  ctx.beginPath();
+  ctx.moveTo(pos.x, pos.y);
+
+}
+
+function draw(e) {
+
+  if (!drawing) return;
+
+  e.preventDefault();
+
+  const pos = getPosition(e);
+
+  ctx.strokeStyle = color;
+  ctx.lineTo(pos.x, pos.y);
+  ctx.stroke();
+
+}
+
+function stopDraw() {
+
+  drawing = false;
+
+}
+
+canvas.addEventListener("mousedown", startDraw);
+canvas.addEventListener("mousemove", draw);
+canvas.addEventListener("mouseup", stopDraw);
+canvas.addEventListener("mouseleave", stopDraw);
+
+canvas.addEventListener("touchstart", startDraw);
+canvas.addEventListener("touchmove", draw);
+canvas.addEventListener("touchend", stopDraw);
+
+function clearCanvas() {
+
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+}
+
+clearCanvas();
+
+</script>
+
+</body>
+</html>
